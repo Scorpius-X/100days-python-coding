@@ -49,9 +49,9 @@ print(move_list[comp_pick])
 
 if rps[comp_pick] == my_pick:
     print("It's a Tie")
-elif comp_pick == 0 and rps_index == 2 or\
-    comp_pick == 2 and rps_index == 1 or\
-        comp_pick == 1 and rps_index == 0:
-        print("You lose")
+elif (comp_pick == 0 and rps_index == 2) or\
+     (comp_pick == 2 and rps_index == 1) or\
+     (comp_pick == 1 and rps_index == 0):
+     print("You lose")
 else:
     print("You win!")
