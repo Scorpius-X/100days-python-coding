@@ -1,6 +1,7 @@
 # Your code appears to be designed to take a list of student heights as input,
 # calculate the total height, the number of students, and then compute the average height
 
+# converts the given string of numbers into a list of integers
 student_heights = input("provide a list of numbers seperated by a space or comma: ").split()
 for n in range(len(student_heights)):
     student_heights[n] = int(student_heights[n])
