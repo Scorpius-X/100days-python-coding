@@ -28,7 +28,7 @@ password = ""
 for char in password_index:
     password += char
 
-print(f"Your passwprd is : {password}")
+print(f"Your password is : {password}")
 
 
 
