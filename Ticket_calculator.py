@@ -1,3 +1,4 @@
+print("Welcome to the Rollercoaster Ride")
 height = int(input("Please input your height in cm: "))
 age = int(input("Please input your age: "))
 
@@ -16,7 +17,7 @@ if height > 120:
     photo = input("Do you want photos?, Please input yes or no: ").lower()
     if photo == "yes":
         ticket += 3
-        print("photos cost $3")
+        print("photos ticket cost $3")
         print(f"Your total bill is {ticket}$")
     else:
         print(f"Your total bill is {ticket}$")
