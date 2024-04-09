@@ -15,7 +15,7 @@ elif age >= 12 and age <= 18:
 else:
     ticket += 5
 
-photo = input("Please input Yes or No, if you want photos: ").lower()
+photo = input("Do you want photos?, Please input yes or no: ").lower()
 
 if photo == "yes":
     ticket += 3
