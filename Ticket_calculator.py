@@ -11,6 +11,9 @@ if height > 120:
     elif age >= 12 and age <= 18:
         ticket += 7
         print("Youth tickets cost $7")
+    elif age >= 45 and age <= 55:
+        ticket += 0
+        print("Elders tickets are free")
     else:
         ticket += 5
         print("children tickets cost $5")
