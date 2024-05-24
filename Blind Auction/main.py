@@ -7,23 +7,35 @@ from art import logo
 
 
 
-# def auction_board(partaker_name, bid_price):
+# lets define the function name to determine the highest bidder and bid
 
 
-print(logo)
-print("Welcome to the secret auction program!")
+def find_highest_bid(bids):
+    highest_bid = 0
+    winner = ""
+    for bidder in bids:
+        bid_amount = bids[bidder]
+        if bid_amount > highest_bid:
+            highest_bid = bid_amount
+            winner = bidder
+    return winner, highest_bid
+
+bids = {}
 should_continue = True
-auction = {}
+print(logo)
+print("Welcome to the Secret Auction Program!")
 while should_continue:
-    partaker_name = input("What is your name? ")
-    bid_price = (input("How much are you bidding?: "))
-    auction[partaker_name] = bid_price
-    max_key = max(auction, key=auction.get)
-    max_value = auction[max_key]
-    other_bids = input("Are there any other bidder? 'yes' or 'no': ").lower()
-    if other_bids == "no":
-        should_continue = False
-        print(f"the winner is {max_key} with a bid of ${max_value}.")
-        break
+    name = input("What is your name?: ")
+    price = float(input("How much are you bidding?: $"))
+    bids[name] = price
+
+    should_continue = input("Are there any other bidders? Type 'yes' or 'no'.\n") == "yes"
+    if not should_continue:
+        winner, highest_bid = find_highest_bid(bids)
+        print(f"The winner is {winner}, with a bid of ${highest_bid:.2f}")
     else:
         clear_terminal()
+
+
+
+
