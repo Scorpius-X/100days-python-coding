@@ -52,3 +52,8 @@ if Year % 4 == 0:
         print("Leap Year")
 else:
     print("Not leap year")
+
+#if its not divisible by 4 = not leap year
+#if its divisible by 4 and not divisible by 100 = leap year
+#if its divisible by 4 and divisible by 100 but not divisible by 400 = not leap year
+#if it divisible by 4,100,400 = leap year
