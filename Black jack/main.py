@@ -1,101 +1,102 @@
 import random
 from art import logo
 
+blackjack = 21
+
 def draw_cards():
     cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
     return random.choice(cards)
 
-# Function to display the current status
-def display_status():
-    print(f"Your cards: {sub_cards}, current score: {sum_of_choice}")
-    print(f"Computer's deck : {comp_cards}, Computer's first card: {comp_cards[0]}, Computer's current score is {sum_of_comp_choice}")
-
-sub_cards = []
-sum_of_choice = 0
-comp_cards = []
-sum_of_comp_choice = 0
-blackjack = 21
-
-def hit_card():
-    global sum_of_choice
-    global sub_cards
-    should_continue = True
-    while should_continue:
-        hit = input("Do you want to add more cards? Type 'yes' or 'no'.\n")
-        if hit.lower() == "yes":
-            random_card = draw_cards()
-            sub_cards.append(random_card)
-            sum_of_choice += random_card
-            display_status()
-            if sum_of_choice > blackjack:
-                if 11 in sub_cards:
-                    sub_cards.remove(11)
-                    sub_cards.append(1)
-                    sum_of_choice -= 10  # Adjust the sum after converting 11 to 1
-                    display_status()
+def display_status(user_cards, sum_of_user_choice, comp_cards=None, sum_of_comp_choice=0, reveal_comp=False):
+    print(f"Your cards: {user_cards}, Your score: {sum_of_user_choice}.")
+    if comp_cards is not None:
+        if reveal_comp:
+            print(f"Computer's cards: {comp_cards}, Computer's score: {sum_of_comp_choice}")
         else:
-            should_continue = False
-            display_status()
-            print("Final hand.")
+            print(f"Computer's first card: {comp_cards[0]}")
+    else:
+        print("Computer's cards are hidden.")
 
-# Start the game
+def check_blackjack(sum_of_user_choice, sum_of_comp_choice):
+    if sum_of_user_choice == blackjack and sum_of_comp_choice == blackjack:
+        print("It's a tie with Blackjack!")
+        return True
+    elif sum_of_user_choice == blackjack:
+        print("You win with a Blackjack!")
+        return True
+    elif sum_of_comp_choice == blackjack:
+        print("You lose, computer wins with a Blackjack!")
+        return True
+    return False
+
+def compare_cards(sum_of_user_choice, sum_of_comp_choice):
+    if sum_of_user_choice > 21:
+        print("You bust! You lose!")
+    elif sum_of_comp_choice > 21:
+        print("Computer busts! You win!")
+    elif sum_of_user_choice > sum_of_comp_choice:
+        print("You win!")
+    elif sum_of_user_choice < sum_of_comp_choice:
+        print("You lose!")
+    else:
+        print("It's a tie!")
+
+def adjust_for_aces(cards, current_sum):
+    while current_sum > 21 and 11 in cards:
+        cards[cards.index(11)] = 1
+        current_sum -= 10
+        print("Swaps Ace with 1")
+    return current_sum
+
+def hit_card(user_cards, sum_of_user_choice):
+    while True:
+        if input("Do you want to add more cards? Type 'yes' or 'no'.\n").lower() == "yes":
+            random_card = draw_cards()
+            user_cards.append(random_card)
+            sum_of_user_choice += random_card
+            sum_of_user_choice = adjust_for_aces(user_cards, sum_of_user_choice)
+            display_status(user_cards, sum_of_user_choice)
+            if sum_of_user_choice > blackjack:
+                print("Bust")
+                print("You lose")
+                break
+        else:
+            break
+    return sum_of_user_choice
+
+def computer_turn(comp_cards, sum_of_comp_choice):
+    while sum_of_comp_choice <= 16:
+        random_card = draw_cards()
+        comp_cards.append(random_card)
+        sum_of_comp_choice += random_card
+        sum_of_comp_choice = adjust_for_aces(comp_cards, sum_of_comp_choice)
+    return sum_of_comp_choice
+
 def start_game():
-    global sum_of_choice
-    global sub_cards
-    global sum_of_comp_choice
-    global comp_cards
-    start_game = input("Type 'yes' to start game: ").lower() == 'yes'
-    if start_game:
+    while input("Type 'Yes' to Start or 'No' to End the game: \n").lower() == 'yes':
         print(logo)
         print("Welcome to BlackJack")
 
-        # Draw initial cards for the player
+        user_cards = []
+        sum_of_user_choice = 0
+        comp_cards = []
+        sum_of_comp_choice = 0
+
         for _ in range(2):
-            card = draw_cards()
-            sub_cards.append(card)
-            sum_of_choice += card
+            user_cards.append(draw_cards())
+            sum_of_user_choice += user_cards[-1]
+            comp_cards.append(draw_cards())
+            sum_of_comp_choice += comp_cards[-1]
 
-        # Draw initial cards for the computer
-        for _ in range(2):
-            card = draw_cards()
-            comp_cards.append(card)
-            sum_of_comp_choice += card
+        display_status(user_cards, sum_of_user_choice, comp_cards, sum_of_comp_choice)
 
-        # Display initial status
-        display_status()
+        if not check_blackjack(sum_of_user_choice, sum_of_comp_choice):
+            sum_of_user_choice = hit_card(user_cards, sum_of_user_choice)
+            if sum_of_user_choice <= 21:
+                sum_of_comp_choice = computer_turn(comp_cards, sum_of_comp_choice)
+            display_status(user_cards, sum_of_user_choice, comp_cards, sum_of_comp_choice, reveal_comp=True)
+            compare_cards(sum_of_user_choice, sum_of_comp_choice)
 
-        # Check for initial blackjack
-        if sum_of_choice == blackjack and sum_of_comp_choice == blackjack:
-            print("It's a tie! Both you and the computer have Blackjack.")
-        elif sum_of_choice == blackjack:
-            print("Congratulations! You have a Blackjack and win!")
-        elif sum_of_comp_choice == blackjack:
-            print("Computer has a Blackjack. You lose.")
-        else:
-            # Continue game
-            hit_card()
+    print("Thanks and Goodbye")
 
-            # After the player finishes, it's the computer's turn
-            while sum_of_comp_choice <= 16:
-                comp_draw = draw_cards()
-                comp_cards.append(comp_draw)
-                sum_of_comp_choice += comp_draw
-                if sum_of_comp_choice > blackjack and 11 in comp_cards:
-                    comp_cards.remove(11)
-                    comp_cards.append(1)
-                    sum_of_comp_choice -= 10  # Adjust the sum after converting 11 to 1
-
-            # Display final status
-            display_status()
-
-            # Determine winner after hitting cards
-            if sum_of_choice <= blackjack:
-                if sum_of_choice > sum_of_comp_choice or sum_of_comp_choice > blackjack:
-                    print("You win!")
-                elif sum_of_choice == sum_of_comp_choice:
-                    print("It's a tie!")
-                else:
-                    print("You lose. Computer wins.")
-            else:
-                print("You went over 21. You lose.")
 start_game()
