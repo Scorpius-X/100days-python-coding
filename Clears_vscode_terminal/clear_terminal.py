@@ -1,9 +1,11 @@
 import os
+import platform
 
 def clear_terminal():
-    # Detect the operating system
-    if os.name == 'nt':  # For Windows
-        os.system('cls')
-    else:  # For MacOS and Linux
-        os.system('clear')
-    pass
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+if __name__ == "__main__":
+    clear_terminal()
