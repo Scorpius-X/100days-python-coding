@@ -23,7 +23,9 @@ def check_cost(coffee):
         return True
     else:
         print("Sorry your money is not enough")
+        print(f"Your {coffee_choice} cost ${required_money}")
         return False
+
 #update resources
 def update_resources(coffee, resource, profits):
     resources['money'] = profits
@@ -31,12 +33,10 @@ def update_resources(coffee, resource, profits):
     for ingredient, required_amount in required_ingredients.items():
         resource[ingredient] -= required_amount
 
+#displays report
 def display_report():
     for key, value in resources.items():
             print(f"{key}:{value}")
-
-
-
 
 profit = 0
 while True:
@@ -65,7 +65,6 @@ while True:
                     cost_of_coffee = MENU[coffee_choice]['cost']
                     profit += cost_of_coffee
                     update_resources(coffee_choice, resources, profit)
-                    print(resources)
             else:
                 print(f"You cannot make {coffee_choice} due to insufficient resources")
 
