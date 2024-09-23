@@ -54,6 +54,8 @@ if start_trade == "yes":
             if should_continue == "no":
                 find_the_highest_bidder(bids)
                 continue_bidding = False
+            else:
+                print("\n" * 20)
 
     else:
         istrue = False
