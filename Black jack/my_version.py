@@ -1,4 +1,5 @@
 import random
+from art import logo
 
 def draw_cards():
     """Returns a random card from a deck of cards"""
@@ -25,46 +26,55 @@ def compare_cards(u_score, comp_score):
         return "You lose!, computer wins!"
     if u_score > 21:
         return "You went over, you lose!"
-    if u_score > comp_score:
+    if comp_score > 21:
         return "You win!, Computer went over"
+    if u_score > comp_score:
+        return "You win!"
     else:
         return "You lose"
 
+def play_game():
+    print(logo)
+    user_card = []
+    computer_card = []
 
-user_card = []
-computer_card = []
+    computer_score = -1
+    user_score = -1
 
-computer_score = -1
-user_score = -1
+    is_game_over = False
 
-is_game_over = False
+    for i in range(2):
+        user_card.append(draw_cards())
+        computer_card.append(draw_cards())
 
-for i in range(2):
-    user_card.append(draw_cards())
-    computer_card.append(draw_cards())
+    """User setup"""
+    while not is_game_over:
+        user_score = calculate_score(user_card)
+        computer_score = calculate_score(computer_card)
 
-"""User setup"""
-while not is_game_over:
-    user_score = calculate_score(user_card)
-    computer_score = calculate_score(computer_card)
+        print(f"Your cards are {user_card} and your score is {user_score}")
+        print(f"Computer's first card is: {computer_card[0]}")
 
-    print(f"Your cards are {user_card} and your score is {user_score}")
-    print(f"Computer's first card is: {computer_card[0]}")
-
-    if user_score == 0 or computer_score == 0 or user_score > 21:
-        is_game_over = True
-    else:
-        user_should_deal = input("Please input Y to deal or N to pass: ").lower()
-        if user_should_deal == "y":
-            user_card.append(draw_cards())
-        else:
+        if user_score == 0 or computer_score == 0 or user_score >= 21:
             is_game_over = True
+        else:
+            user_should_deal = input("Please input Y to deal or N to pass: ").lower()
+            if user_should_deal == "y":
+                user_card.append(draw_cards())
+            else:
+                is_game_over = True
 
-"""Computer setup"""
-while computer_score != 0 and computer_score < 17:
-    computer_card.append(draw_cards())
-    computer_score = calculate_score(computer_card)
+    """Computer setup( ensures that the computer keeps drawing only if no bj has been hit )"""
+    if computer_score != 0:
+        while computer_score < 17:
+            computer_card.append(draw_cards())
+            computer_score = calculate_score(computer_card)
 
+    # Final results
+    print(f"Your final hand: {user_card}, final score: {user_score}")
+    print(f"Computer's final hand: {computer_card}, final score: {computer_score}")
+    print(compare_cards(user_score, computer_score))
 
-
-
+while input("Do you want to play a game of blackjack? type 'y' to start or 'n' to end : ").lower() == "y":
+    print("\n" * 20)
+    play_game()
