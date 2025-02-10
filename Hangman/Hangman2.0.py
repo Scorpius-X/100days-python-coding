@@ -1,63 +1,7 @@
 #Step 4
 
 import random
-
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
+from Hangman_art import stages
 
 end_of_game = False
 word_list = ["ardvark", "baboon", "camel"]
@@ -72,19 +16,16 @@ lives = 6
 print(f'Pssst, the solution is {chosen_word}.')
 
 #Create blanks
-display = []
-for _ in range(word_length):
-    display += "_"
+display = ["_" for _ in range(word_length)]
 
 while not end_of_game: # end_of_game = false, while not false
     guess = input("Guess a letter: ").lower()
 
     #Check guessed letter
-    for position in range(word_length):
-        letter = chosen_word[position]
-        # print(f"Current position: {position}\n Current letter: {letter}\n Guessed letter: {guess}")
-        if letter == guess:
-            display[position] = letter
+    if guess in chosen_word:
+     for position in range(word_length):
+        if chosen_word[position] == guess:
+          display[position] = guess
 
     #TODO-2: - If guess is not a letter in the chosen_word,
     #Then reduce 'lives' by 1. 

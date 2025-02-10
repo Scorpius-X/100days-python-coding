@@ -1,3 +1,5 @@
+#creating a game of blackjack
+
 import random
 from art import logo
 

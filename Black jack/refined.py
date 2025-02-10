@@ -1,4 +1,5 @@
 import random
+from art import logo
 
 def draw_cards():
     cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
@@ -40,7 +41,7 @@ def start_game():
             play_again = False
             print("Thanks for playing!")
             break
-
+        print(logo)
         print("Welcome to BlackJack")
 
         sub_cards = []
