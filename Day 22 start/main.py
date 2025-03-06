@@ -1,12 +1,14 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
 screen.bgcolor("black")
 screen.setup(800,600)
 screen.title("Pong")
+scoreboard = Scoreboard() 
 screen.tracer(0)
 
 pong = Ball()
