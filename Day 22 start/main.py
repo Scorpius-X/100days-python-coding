@@ -27,7 +27,7 @@ game_is_on = True
 
 while game_is_on:
     screen.update()
-    time.sleep(0.1)
+    time.sleep(pong.move_speed)
     pong.move()
     
 
@@ -35,9 +35,13 @@ while game_is_on:
     #detect collision with rpaddle wall
     if pong.xcor() > 350:
         pong.reset_position()
+        scoreboard.l_point()
+
     
+    #detect collision with lpaddle wall
     if pong.xcor() < -350:
         pong.reset_position()
+        scoreboard.r_point()
     
 
     #detect collision with top and bottom wall
