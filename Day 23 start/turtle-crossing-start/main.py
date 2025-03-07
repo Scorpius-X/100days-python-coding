@@ -8,21 +8,20 @@ from scoreboard import Scoreboard
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
-
-
-    
+car = CarManager()
 
 
 player = Player()
 score = Scoreboard()
+screen.listen()
+
+screen.onkey(player.move_turtle, "Up")
+
 
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+    car.move_cars()
 
-    positions = [(250, -150),(250, -100),(250, -50), (250, 0), (250, 50), (250, 100),(250, 150) ]
-    for i in range(50):
-        for position in random.choice(positions):
-            cars = CarManager(position)
-        cars.move_cars()
+   
