@@ -49,8 +49,8 @@ import pandas
 # data.to_csv("100days-python-coding/Day25/new_data.csv")
 
 data = pandas.read_csv("100days-python-coding/Day25/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
-fur_color = data.get("Primary Fur Color")
-count = data["Primary Fur Color"].value_counts()
+# fur_color = data.get("Primary Fur Color")
+# count = data["Primary Fur Color"].value_counts()
 grey_squirrels_count = len(data[data["Primary Fur Color"] == "Gray"])
 red_squirrels_count = len(data[data["Primary Fur Color"] == "Cinnamon"])
 black_squirrels_count = len(data[data["Primary Fur Color"] == "Black"])
