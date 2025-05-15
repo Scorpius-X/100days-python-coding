@@ -26,6 +26,12 @@ while len(guessed_states) < 50:
     matching_state = data[data.state == answer]
 
     if answer == "Exit":
+        not_guessed = []
+        for item in data.state:
+            if item not in guessed_states:
+                not_guessed.append(item)
+        df = pandas.DataFrame(not_guessed)
+        df.to_csv("100days-python-coding\\Day25.2\\states_to_learn.csv", index= False)
         break
 
     if not matching_state.empty:
@@ -40,4 +46,8 @@ while len(guessed_states) < 50:
             t.goto(x,y)
             t.pendown()
             t.write(answer)
+    
+
+
+
 
