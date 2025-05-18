@@ -28,7 +28,7 @@ while len(guessed_states) < 50:
     if answer == "Exit":
         not_guessed = [item for item in data.state if item not in guessed_states]
         df = pandas.DataFrame(not_guessed)
-        df.to_csv("100days-python-coding\\Day25.2\\states_to_learn.csv", index= False)
+        df.to_csv("100days-python-coding\\Day25.2\\states_to_learn.csv", index= False, header= False)
         break
 
     if not matching_state.empty:
