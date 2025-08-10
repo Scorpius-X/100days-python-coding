@@ -1,7 +1,7 @@
 import pandas
 
 
-data = pandas.read_csv("Day25\\2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+data = pandas.read_csv("100days-python-coding/Day25/2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
 # fur_color = data.get("Primary Fur Color")
 # count = data["Primary Fur Color"].value_counts()
 grey_squirrels_count = len(data[data["Primary Fur Color"] == "Gray"])
@@ -22,7 +22,7 @@ data_dict = {
 #create a Dataframe using pandas and initialise it using the dictionary
 
 df = pandas.DataFrame(data_dict)
-df.to_csv("Day25/Squirrel_count.csv")
+df.to_csv("100days-python-coding/Day25/Squirrel_count.csv")
 
 
 # with open("100days-python-coding/Day25/weather_data.csv") as data:
