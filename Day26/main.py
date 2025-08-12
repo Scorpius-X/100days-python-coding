@@ -21,7 +21,7 @@ for (index, row) in student_data_frame.iterrows():
 # {new_key:new_value for (index, row) in df.iterrows()}
 
 
-nato_data = pandas.read_csv("100days-python-coding\\Day26\\nato_phonetic_alphabet.csv")
+nato_data = pandas.read_csv("Day26\\nato_phonetic_alphabet.csv")
 nato_dict = {row.letter : row.code for (index, row) in nato_data.iterrows()}
 
 # def natofunc():
