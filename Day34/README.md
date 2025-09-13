@@ -1,0 +1,1 @@
+This is a Quiz app, that asks 10 random questions and records your score, it indicates if you got the questions right or wrong via green or red colors, which shows after you click the right or wrong button, to access the app start by running the main.py file on your terminal.
