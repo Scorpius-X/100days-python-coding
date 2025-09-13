@@ -19,8 +19,8 @@ class QuizInterface:
         self.canvas = Canvas(width= 300, height= 250, bg= "white")
         self.canvas.grid(row= 1, column= 0, columnspan= 2, pady= 50)
         self.question = self.canvas.create_text(150, 125,text = "Extraordinary", width= 280, font= ("arial", 20, "italic") )
-        false_img = PhotoImage(file = "100days-python-coding\\Day34\\images\\false.png")
-        true_img = PhotoImage(file = "100days-python-coding\\Day34\\images\\true.png")
+        false_img = PhotoImage(file = "Day34\\images\\false.png")
+        true_img = PhotoImage(file = "Day34\\images\\true.png")
         self.right_button = Button(image= true_img, highlightthickness=0, command= self.true_button )
         self.wrong_button = Button(image= false_img, highlightthickness=0, command= self.false_button)
 

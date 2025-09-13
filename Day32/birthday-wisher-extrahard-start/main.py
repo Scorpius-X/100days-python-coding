@@ -29,7 +29,7 @@ today = (day,month)
 output_dir = "C:/Users/ALPHONSE/Desktop/GitHub/100days-python-coding/Day32"
 os.makedirs(output_dir, exist_ok= True)
 
-data_dict = {}
+data_dict =  {}
 random_letter = [
     "Day32/birthday-wisher-extrahard-start/letter_templates/letter_1.txt",
     "Day32/birthday-wisher-extrahard-start/letter_templates/letter_2.txt",
